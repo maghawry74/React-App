@@ -1,13 +1,35 @@
-body {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&display=swap');
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+  font-family: 'Cairo';
+}
+.active__Slider {
+  @apply relative transition-all lg:w-4 lg:h-full sm:h-4 sm:w-[30rem] rounded-[3rem] object-cover blur-none flex-grow-[10] duration-700;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.notActive__Slider {
+  @apply relative transition-all lg:w-4 lg:h-full sm:h-4 sm:w-[30rem] rounded-[3rem] object-cover blur-sm flex-grow duration-700;
+}
+.active {
+  @apply text-indigo-700;
+}
+.SuccessfullOrder__i {
+  color: #9abc66;
+  font-size: 100px;
+  line-height: 200px;
+  margin-left: -15px;
+}
+
+.SuccessfullOrder__card {
+  background: rgba(143, 143, 143, 0.073);
+  padding: 60px;
+  border-radius: 4px;
+  box-shadow: 0 2px 3px #c8d0d8;
+  display: inline-block;
+  margin: 0 auto;
 }
