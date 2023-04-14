@@ -9,7 +9,7 @@ export default function Sponser({ image }) {
       onMouseLeave={() => setIsHidden(false)}
     >
       <img
-        className={`-z-10 opacity-50 transition-all duration-500 absolute ${
+        className={`-z-10 opacity-50 transition-all duration-100 absolute ${
           isHidden ? '-translate-x-full' : ''
         }}`}
         src={image}

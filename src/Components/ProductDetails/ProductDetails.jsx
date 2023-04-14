@@ -18,10 +18,10 @@ export default function ProductDetails() {
     const product = data.data
     output = (
       <>
-        <div className=" col-start-1 col-end-4 col-span-4 my-16">
-          <img src={product?.image} className="w-[36rem] rounded-md" alt="" />
+        <div className=" col-start-1 col-end-4 col-span-4 my-16 ">
+          <img src={product?.image} className="w-[36rem] rounded-md shadow-lg" alt="" />
         </div>
-        <div className=" col-start-5 col-end-6 col-span-2 margin">
+        <div className="col-start-5 col-end-6 col-span-2 ">
           <div className="mb-5">
             <h1 className="text-bold lg:text-3xl sm:text-xl">{product?.ProductName}</h1>
             <h3 className="text-bold text-2xl">
@@ -42,7 +42,7 @@ export default function ProductDetails() {
     )
   }
   return (
-    <div className="w-3/4  mx-auto grid grid-col-6 sm:grid-col-1 md:grid-col-3 lg:grid-col-6 my-[5rem] items-center lg:gap-20 sm:gap-5">
+    <div className="w-3/4 mb-[19rem]  mx-auto grid grid-col-6 sm:grid-col-1 md:grid-col-3 lg:grid-col-6 items-center lg:gap-20 sm:gap-5">
       {output}
     </div>
   )

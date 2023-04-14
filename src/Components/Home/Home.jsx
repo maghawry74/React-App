@@ -5,11 +5,11 @@ import Testmonials from './Testmonial'
 
 export default function Home() {
   return (
-    <>
+    <div className="mb-[19rem]">
       <FlexCard />
       <HomeProductList />
       <Testmonials />
       <SponserList />
-    </>
+    </div>
   )
 }
