@@ -1,11 +1,21 @@
 import { useContext, useState } from 'react'
 import SuccessfullOrder from './SuccessfulOrder'
 import { cartCtx } from '../Shared/CartContext'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import CartProduct from './CartProduct'
+import Spinner from '../Shared/Spinner'
+import { MakeOrder } from '../../Queres/DbHandler'
+import { useMutation } from 'react-query'
+import { UserCtx } from '../Shared/UserContext'
+import Modal from '../Shared/Modal'
+import Error from '../Shared/Error'
 export default function Cart() {
-  const [success] = useState(false)
-  const { cart, Price } = useContext(cartCtx)
+  const mutataion = useMutation(({ data, token }) => MakeOrder(data, token))
+  const [success, setSuccess] = useState(false)
+  const [showModal, setShowModal] = useState(false)
+  const { cart, Price, ClearCart } = useContext(cartCtx)
+  const { user } = useContext(UserCtx)
+  const navigation = useNavigate()
   let output
   if (success) {
     return <SuccessfullOrder />
@@ -23,20 +33,57 @@ export default function Cart() {
   } else {
     output = cart.map((product) => <CartProduct product={product} key={product._id} />)
   }
+  function OrderHandler() {
+    if (user == null) {
+      navigation('/login')
+      return
+    }
+    const order = {
+      Price: Price,
+      user: user.id,
+      Products: cart.map((P) => {
+        return { Product: P._id, Quantity: P.Quantity }
+      }),
+    }
+    const token = `Bearer ${JSON.parse(localStorage.getItem('user')).token}`
+    mutataion.mutate({ data: order, token })
+  }
+
+  if (mutataion.error) {
+    return <Error />
+  }
+  if (mutataion.isLoading) {
+    return <Spinner />
+  }
+  if (mutataion.isSuccess) {
+    setSuccess(true)
+    ClearCart()
+  }
   return (
     <div className="w-3/4 mx-auto min-h-screen mb-[19rem]">
       <div className="flex justify-between items-center border-b-2 py-5 border-black transition-all duration-300">
         <div>
           <h1 className="lg:text-4xl sm:text-2xl">Shopping Cart</h1>
           <h1 className={`lg:text-4xl sm:text-2xl ${Price === 0 ? 'opacity-0' : 'opacity-100'}`}>
-            Total: $ {Price}{' '}
+            Total: $ {Price}
           </h1>
         </div>
-        <button className="bg-black text-white rounded-md hover:bg-gray-500 hover:text-white transition-all duration-200 py-2 px-4">
+        <button
+          disabled={cart.length === 0}
+          onClick={() => setShowModal(true)}
+          className={`${
+            cart.length === 0 ? 'bg-gray-500 text-white' : 'bg-black text-white'
+          } rounded-md hover:bg-gray-500 hover:text-white transition-all duration-200 py-2 px-4`}
+        >
           CheckOut
         </button>
       </div>
       {output}
+      {showModal && (
+        <Modal closeModal={() => setShowModal(false)} continueAction={OrderHandler}>
+          Are You Sure To Continue Purchasing This Order
+        </Modal>
+      )}
     </div>
   )
 }

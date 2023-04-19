@@ -10,7 +10,7 @@ export default function Sponser({ image }) {
     >
       <img
         className={`-z-10 opacity-50 transition-all duration-100 absolute ${
-          isHidden ? '-translate-x-full' : ''
+          isHidden ? '' : '-translate-x-full'
         }}`}
         src={image}
         alt=""
@@ -18,7 +18,7 @@ export default function Sponser({ image }) {
       <img
         src={image}
         alt=""
-        className={`z-20  duration-500 transition-all ${!isHidden ? 'translate-x-full' : ''}`}
+        className={`z-20  duration-500 transition-all ${!isHidden ? '-translate-x-full' : ''}`}
       />
     </div>
   )

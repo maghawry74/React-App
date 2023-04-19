@@ -18,6 +18,9 @@
 .active {
   @apply text-indigo-700;
 }
+.dashboard ul li .active {
+  @apply bg-[rgb(42,42,60)] text-white;
+}
 .SuccessfullOrder__i {
   color: #9abc66;
   font-size: 100px;
@@ -37,4 +40,3 @@ html {
   position: relative;
   min-height: 100%;
 }
-

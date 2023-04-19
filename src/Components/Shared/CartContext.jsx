@@ -7,6 +7,7 @@ const cartCtx = createContext({
   Price: 0,
   IncreaseQty: () => {},
   DecreaseQty: () => {},
+  ClearCart: () => {},
 })
 export default function CartContext({ children }) {
   const [cart, setCart] = useState([])
@@ -38,6 +39,9 @@ export default function CartContext({ children }) {
       }
     })
   }
+  function ClearCart() {
+    setCart([])
+  }
   return (
     <cartCtx.Provider
       value={{
@@ -47,6 +51,7 @@ export default function CartContext({ children }) {
         Price: price,
         IncreaseQty,
         DecreaseQty,
+        ClearCart,
       }}
     >
       {children}

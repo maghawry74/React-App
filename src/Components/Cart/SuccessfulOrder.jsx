@@ -1,7 +1,7 @@
 export default function SuccessfullOrder() {
   return (
-    <div class="grid h-screen place-items-center">
-      <div class="card text-center ">
+    <div className="grid min-h-screen mb-[19rem] py-20 place-items-center">
+      <div className="card text-center ">
         <div
           style={{
             borderRadius: '200px',
@@ -11,7 +11,7 @@ export default function SuccessfullOrder() {
             margin: '0 auto',
           }}
         >
-          <i class="checkmark SuccessfullOrder__i">✓</i>
+          <i className="checkmark SuccessfullOrder__i">✓</i>
         </div>
         <h1 className="font-bold text-xl">Success</h1>
         <p className="text-2xl">

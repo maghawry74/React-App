@@ -1,24 +1,29 @@
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 
 export const UserCtx = createContext({
   user: {},
-  Login: () => {},
+  Signin: () => {},
   Logout: () => {},
 })
 export default function UserContext({ children }) {
   const [user, setUser] = useState(null)
 
-  function Login(user) {
+  function Signin(user) {
     setUser(user)
   }
   function Logout() {
+    localStorage.clear()
     setUser(null)
   }
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'))
+    Signin(user)
+  }, [])
   return (
     <UserCtx.Provider
       value={{
         user,
-        Login,
+        Signin,
         Logout,
       }}
     >

@@ -5,11 +5,11 @@ import { UserLogin } from '../../Queres/DbHandler'
 import { useContext, useEffect } from 'react'
 import { UserCtx } from '../Shared/UserContext'
 export default function Login() {
-  const { Login } = useContext(UserCtx)
+  const { Signin } = useContext(UserCtx)
   const mutation = useMutation((e) => {
     return UserLogin(e)
   })
-
+  console.log('Login')
   const navigation = useNavigate()
   function FormSubmit(e) {
     e.preventDefault()
@@ -22,15 +22,20 @@ export default function Login() {
   }
   useEffect(() => {
     if (mutation.isSuccess) {
-      navigation('/shop')
-      console.log(mutation.data.data)
-      const user=mutation.data.data
-      Login({
-        role:user.role,
-        token:user.token,
-        Name:user.user.FirstName,
-        id:user.user._id
-      })
+      const user = mutation.data.data
+      const loggedUser = {
+        role: user.role,
+        token: user.token,
+        Name: user?.user?.FirstName ?? 'Admin',
+        id: user?.user?._id,
+      }
+      localStorage.setItem('user', JSON.stringify(loggedUser))
+      if (user.role === 'Admin') {
+        navigation('/dashboard/products')
+      } else {
+        navigation('/shop')
+      }
+      Signin(loggedUser)
     }
   })
 

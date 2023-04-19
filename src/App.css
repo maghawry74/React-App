@@ -37,3 +37,11 @@
     background-size: calc(100% / 3) 100%, calc(100% / 3) 100%, calc(100% / 3) 0%;
   }
 }
+.NotFound__Main {
+  background-image: url('../public/assets/imgs/bg1.jpg');
+  object-fit: cover;
+}
+
+.ProductForm__File {
+  @apply block z-50 w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400;
+}

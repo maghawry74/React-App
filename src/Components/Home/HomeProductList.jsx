@@ -4,11 +4,11 @@ import HomeProduct from './HomeProduct'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import '@splidejs/react-splide/css'
 import { useQuery } from 'react-query'
-import fetchProducts from '../../Queres/fetchProducts'
 import Spinner from '../Shared/Spinner'
+import { FetchProducts } from '../../Queres/DbHandler'
 
 export default function HomeProductList() {
-  const { isLoading, error, data } = useQuery('products', () => fetchProducts('/products'))
+  const { isLoading, error, data } = useQuery(['products', 10, 0], FetchProducts)
   let output
   const ref = useRef()
   if (isLoading) {
@@ -16,7 +16,7 @@ export default function HomeProductList() {
   } else if (error) {
     output = <h1 className="my-20 mx-auto w-fit text-3xl font-bold">Error Has Occured</h1>
   } else {
-    const products = data.data
+    const products = data.data.products
     output = (
       <Splide
         ref={ref}

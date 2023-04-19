@@ -20,7 +20,7 @@ export default function HomeProduct({ product, classname = '' }) {
       <div className="text-center relative overflow-hidden">
         <img src={product.image} alt={product.ProductName} className="cursor-pointer shadow-lg" />
         <button
-          onClick={() => navigate(`product/${product._id}`)}
+          onClick={() => navigate(`/product/${product._id}`)}
           className={`py-2 px-4 text-sm bg-black text-white absolute left-[37%] transition-all duration-500 ${
             !isHovered ? '' : '-translate-y-full'
           }`}
