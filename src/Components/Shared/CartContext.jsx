@@ -20,7 +20,7 @@ export default function CartContext({ children }) {
     }
   }
   function RemoveProduct(product) {
-    setPrice((prev) => prev - product.Price)
+    setPrice((prev) => prev - product.Price * product.Quantity)
     setCart((prev) => prev.filter((p) => p._id !== product._id))
   }
   function IncreaseQty(product) {

@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import Spinner from '../Shared/Spinner'
 export default function Shop() {
   const [Pages, setPages] = useState([])
-  const numberOfProductsPerPage = 9
+  const numberOfProductsPerPage = 8
   let output
   const [products, setProducts] = useState(null)
   const [activePage, setActivePage] = useState(1)
@@ -141,7 +141,7 @@ export default function Shop() {
           </select>
         </div>
       </div>
-      <div className="grid grid-cols-2 my-5 md:grid-cols-3 gap-5 min-h-screen relative justify-center items-center">
+      <div className="grid  my-5 md:grid-cols-4 gap-x-2 gap-y-1 min-h-screen relative justify-center items-center">
         {output}
       </div>
       <div className="flex justify-center gap-1">
