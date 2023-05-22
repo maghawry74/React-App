@@ -22,7 +22,7 @@ export default function ShopProduct({ product }) {
           <img
             src={product.image}
             alt={product.ProductName}
-            className="hover:opacity-30  shadow-xl"
+            className="hover:opacity-30  shadow-xl rounded-lg"
           />
           <FontAwesomeIcon
             icon="fa-solid fa-cart-plus"
@@ -37,8 +37,8 @@ export default function ShopProduct({ product }) {
             isHovered ? 'opacity-100' : 'opacity-0'
           } absolute text-3xl whitespace-nowrap top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  font-semibold transition-all duration-500 text-center `}
         >
-          <h1 className="my-2 ">{product.ProductName}</h1>
-          <h1 className="my-2 ">${product.Price}</h1>
+          <h1 className=" text-lg">{product.ProductName}</h1>
+          <h1 className="text-lg">${product.Price}</h1>
         </div>
       </div>
     </div>

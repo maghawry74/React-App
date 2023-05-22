@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import Spinner from '../Shared/Spinner'
 export default function Shop() {
   const [Pages, setPages] = useState([])
-  const numberOfProductsPerPage = 8
+  const numberOfProductsPerPage = 9
   let output
   const [products, setProducts] = useState(null)
   const [activePage, setActivePage] = useState(1)
@@ -31,7 +31,7 @@ export default function Shop() {
   }, [activePage, products])
   const Data = useRef()
   if (isLoading) {
-    output = <Spinner className="my-20 col-span-3" />
+    output = <Spinner className="my-20 col-span-4" />
   } else if (error) {
     output = (
       <h1 className="my-20 mx-auto w-fit col-span-3 text-3xl font-bold">Error Has Occured</h1>
@@ -80,7 +80,7 @@ export default function Shop() {
   }
 
   return (
-    <div className="w-4/5 mx-auto min-h-screen my-10 mb-[19rem]">
+    <div className="w-4/5 mx-auto min-h-screen my-10 mb-[19rem] flex flex-col justify-between">
       <div className="flex justify-between">
         <div className="flex items-center justify-center py-4 md:py-8 flex-wrap">
           <button
@@ -141,7 +141,7 @@ export default function Shop() {
           </select>
         </div>
       </div>
-      <div className="grid  my-5 md:grid-cols-4 gap-x-2 gap-y-1 min-h-screen relative justify-center items-center">
+      <div className="grid grid-cols-2 my-5 md:grid-cols-4 gap-5 min-h-[70vh]  relative justify-center items-center">
         {output}
       </div>
       <div className="flex justify-center gap-1">

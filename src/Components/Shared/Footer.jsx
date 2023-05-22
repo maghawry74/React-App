@@ -6,7 +6,7 @@ export default function Footer() {
     return null
   } else {
     return (
-      <div className="py-16  flex justify-around w-full bg-black text-white border-t-2 absolute bottom-0 left-0 h-[18rem]">
+      <div className="py-16  flex justify-around w-full bg-black text-white border-t-2 absolute bottom-0 left-0 right-0 h-[18rem]">
         <div>
           <h1 className="font-bold text-1xl mb-5">CUSTOMER SERVICE</h1>
           <ul>
