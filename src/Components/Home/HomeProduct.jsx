@@ -1,9 +1,10 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { cartCtx } from '../Shared/CartContext'
+import { AddProduct } from '../../Store/CartSlice'
+import { useDispatch } from 'react-redux'
 export default function HomeProduct({ product, classname = '' }) {
   const navigate = useNavigate()
-  const { AddProduct } = useContext(cartCtx)
+  const dispatch = useDispatch()
   const [isHovered, setIsHovered] = useState(false)
   function hover() {
     setIsHovered(true)
@@ -34,7 +35,7 @@ export default function HomeProduct({ product, classname = '' }) {
           className={`transition-all duration-500 cursor-pointer absolute text-base block font-bold ${
             !isHovered ? '-translate-x-full' : ''
           }`}
-          onClick={() => AddProduct(product)}
+          onClick={() => dispatch(AddProduct(product))}
         >
           ADD To Cart
         </h1>

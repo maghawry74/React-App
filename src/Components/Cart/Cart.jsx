@@ -1,20 +1,22 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import SuccessfullOrder from './SuccessfulOrder'
-import { cartCtx } from '../Shared/CartContext'
 import { Link, useNavigate } from 'react-router-dom'
 import CartProduct from './CartProduct'
 import Spinner from '../Shared/Spinner'
 import { MakeOrder } from '../../Queres/DbHandler'
 import { useMutation } from 'react-query'
-import { UserCtx } from '../Shared/UserContext'
 import Modal from '../Shared/Modal'
 import Error from '../Shared/Error'
+import { useDispatch, useSelector } from 'react-redux'
+import { ClearCart } from '../../Store/CartSlice'
 export default function Cart() {
   const mutataion = useMutation(({ data, token }) => MakeOrder(data, token))
   const [success, setSuccess] = useState(false)
   const [showModal, setShowModal] = useState(false)
-  const { cart, Price, ClearCart } = useContext(cartCtx)
-  const { user } = useContext(UserCtx)
+  const { cart, Price } = useSelector((state) => state.Cart)
+  console.log(useSelector((s) => s.Cart))
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.User)
   const navigation = useNavigate()
   let output
   if (success) {
@@ -57,7 +59,7 @@ export default function Cart() {
   }
   if (mutataion.isSuccess) {
     setSuccess(true)
-    ClearCart()
+    dispatch(ClearCart())
   }
   return (
     <div className="w-3/4 mx-auto min-h-screen mb-[19rem]">

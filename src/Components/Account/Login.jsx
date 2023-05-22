@@ -2,14 +2,14 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import Alert from '../Shared/Alert'
 import { useMutation } from 'react-query'
 import { UserLogin } from '../../Queres/DbHandler'
-import { useContext, useEffect } from 'react'
-import { UserCtx } from '../Shared/UserContext'
+import { useEffect } from 'react'
+import { Signin } from '../../Store/UserSlice'
+import { useDispatch } from 'react-redux'
 export default function Login() {
-  const { Signin } = useContext(UserCtx)
+  const dispatch = useDispatch()
   const mutation = useMutation((e) => {
     return UserLogin(e)
   })
-  console.log('Login')
   const navigation = useNavigate()
   function FormSubmit(e) {
     e.preventDefault()
@@ -30,12 +30,12 @@ export default function Login() {
         id: user?.user?._id,
       }
       localStorage.setItem('user', JSON.stringify(loggedUser))
+      dispatch(Signin(loggedUser))
       if (user.role === 'Admin') {
         navigation('/dashboard/products')
       } else {
         navigation('/shop')
       }
-      Signin(loggedUser)
     }
   })
 

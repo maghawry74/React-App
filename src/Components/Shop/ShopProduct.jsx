@@ -1,15 +1,15 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { cartCtx } from '../Shared/CartContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { AddProduct } from '../../Store/CartSlice'
+import { useDispatch } from 'react-redux'
 export default function ShopProduct({ product }) {
+  const dispatch = useDispatch()
   const [isHovered, setIsHovered] = useState(false)
-  const { AddProduct } = useContext(cartCtx)
   const navigation = useNavigate()
   function clickEventHandler(e) {
-    console.log(e)
     e.stopPropagation()
-    AddProduct(product)
+    dispatch(AddProduct(product))
   }
   return (
     <div className="cursor-pointer" onClick={() => navigation(`/product/${product._id}`)}>

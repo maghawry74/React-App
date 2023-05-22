@@ -1,7 +1,7 @@
-import { useContext } from 'react'
-import { cartCtx } from '../Shared/CartContext'
+import { useDispatch } from 'react-redux'
+import { RemoveProduct, DecreaseQty, IncreaseQty } from '../../Store/CartSlice'
 export default function CartProduct({ product }) {
-  const { RemoveProduct, IncreaseQty, DecreaseQty } = useContext(cartCtx)
+  const dispatch = useDispatch()
   return (
     <div
       className="grid grid-cols-[repeat(4,minmax(20%,auto))_100px]
@@ -12,14 +12,14 @@ export default function CartProduct({ product }) {
       <h1 className="lg:text-2xl sm:text-xl  ">${product.Price}</h1>
       <div className="flex justify-center gap-5 items-center ">
         <img
-          onClick={() => DecreaseQty(product)}
+          onClick={() => dispatch(DecreaseQty(product))}
           src="assets/icons/minus.png"
           alt=""
           className="cursor-pointer  lg:w-[14px] sm:w-[12px] lg:h-4 sm:h-3 z-10 rotate-180 shadow-lg"
         />
         <p className="font-bold text-xl">{product.Quantity}</p>
         <img
-          onClick={() => IncreaseQty(product)}
+          onClick={() => dispatch(IncreaseQty(product))}
           src="assets/icons/plus.png"
           alt=""
           className="cursor-pointer  lg:w-[14px] sm:w-[12px] lg:h-4 sm:h-3  z-10 rotate-0"
@@ -27,7 +27,7 @@ export default function CartProduct({ product }) {
       </div>
       <img
         src="assets/icons/close.png"
-        onClick={() => RemoveProduct(product)}
+        onClick={() => dispatch(RemoveProduct(product))}
         className="w-3 cursor-pointer"
         alt=""
       />

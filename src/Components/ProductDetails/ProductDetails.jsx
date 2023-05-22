@@ -1,12 +1,12 @@
 import { useParams } from 'react-router-dom'
 import fetchProducts from '../../Queres/fetchProducts'
 import { useQuery } from 'react-query'
-import { cartCtx } from '../Shared/CartContext'
-import { useContext } from 'react'
+import { AddProduct } from '../../Store/CartSlice'
+import { useDispatch } from 'react-redux'
 export default function ProductDetails() {
   let output
+  const dispatch = useDispatch()
   const { id } = useParams()
-  const { AddProduct } = useContext(cartCtx)
   const { isLoading, data, error } = useQuery('product', () => {
     return fetchProducts(`/products/${id}`)
   })
@@ -31,7 +31,7 @@ export default function ProductDetails() {
           <p className="text-secondary mt-3">{product?.Description}</p>
           <div className="mt-5  flex gap-5 items-center justify-start">
             <button
-              onClick={() => AddProduct(product)}
+              onClick={() => dispatch(AddProduct(product))}
               className=" bg-black hover:bg-gray-400 hover:text-yellow-50 transition-all duration-300 text-white font-semibold  py-2 w-40 px-5"
             >
               ADD TO CART
